@@ -28,14 +28,14 @@ $(function(){
 	}
 
 	function outputPageContent2(data, stars, forks, repo_name) {
-		$('.stars').empty();
-		$('.stars').append(stars);
+		// $('.stars').empty();
+		$('.stars').html(stars);
 
-		$('.forks').empty();
-		$('.forks').append(forks);
+		// $('.forks').empty();
+		$('.forks').html(forks);
 
-		$('.repo-name').empty();
-		$('.repo-name').append(repo_name);
+		// $('.repo-name').empty();
+		$('.repo-name').html(repo_name);
 
 		$('#last-commits').empty();
 
