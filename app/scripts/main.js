@@ -3,8 +3,11 @@ $(function(){
 	//renderizar repositorios do globocom
 	var org   	   = 'https://api.github.com/users/globocom',
 		// org_repos  = 'https://api.github.com/orgs/globocom/repos?type=public&per_page=200',
-		org_repos  = 'https://api.github.com/search/repositories?q=user:globocom&sort=stars&order=desc&per_page=200',
+		org_repos  = 'https://api.github.com/search/repositories?q=user:globocom&sort=stars&order=desc&per_page=3',
 		commits,
+		forks_count,
+		stargazers_count,
+
 		repositories;
 
 	function sortByStars(data) {
@@ -14,10 +17,35 @@ $(function(){
     }
 
 	$.getJSON(org_repos, function(json){
-	  repositories = json.items;
-	  console.log(repositories);
-	  outputPageContent(repositories);                
+		repositories = json.items;
+		// console.log(repositories);
+		// outputPageContent(repositories);
+
+		let repositorio = new Repositorios();
+		console.log(repositories);
+		repositorio.lista(repositories);
 	});
+
+	class Repositorios {
+	    constructor(nome, count_forks, count_stars){
+	        this.name = name;
+	        this.stargazers_count = stargazers_count;
+	        this.forks_count = forks_count;
+	    }
+
+	    lista(repositories){
+		var lista = $('#github-projects');
+
+		for(var i=0; i < repositories.length; i++){
+        	//conteúdo do loop
+        	let repositorio = new Repositorios(repositories[i].name, repositories[i].stargazers_count, repositories[i].forks_count)
+    		console.log(repositorio[i].name);
+    		}
+		}
+	}
+
+	
+	
 
 	function outputPageContent(data) {
 		// sortByStars(data);
