@@ -1,24 +1,8 @@
 $(function(){
-	var hash = document.URL.substr(document.URL.indexOf('#')+1)
-	
-	// if ( hash != '' ) {
-	// 	console.log(hash);	
-	// }
-
-	// else {
-	// 	console.log('toma ai');
-	// }
-
-	if(window.location.hash) {
-	  // Fragment exists
-	  console.log('tem hash');
-	} else {
-	  console.log('nao tem hash');
-	}
-	
     //renderizar repositorios do globocom
     let org        = 'https://api.github.com/users/globocom',
         org_repos  = 'https://api.github.com/search/repositories?q=user:globocom&sort=stars&order=desc&per_page=200',
+        hash       = document.URL.substr(document.URL.indexOf('#')+1),
         commits,
         commits_repo = '',
         repo_name,
@@ -86,7 +70,7 @@ $(function(){
 	        		$('.btn-show-more').hide();
 		        }
         	}
-	        
+
 	        else {
 	        	for(var i=0; i < jsonDeCommits.length; i++){
     		        let commit = new Commit(jsonDeCommits[i].commit.author.name, jsonDeCommits[i].commit.message, jsonDeCommits[i].commit.author.date)
@@ -94,7 +78,7 @@ $(function(){
     		    }
 
 	        	if (jsonDeCommits.length != per_page_commits) {
-    				$('.btn-show-more').hide();			
+    				$('.btn-show-more').hide();
 	        	}
 	        }
         }
@@ -103,6 +87,23 @@ $(function(){
     $.getJSON(org_repos, function(json){
         let renderer = new RenderizadorHtml();
         renderer.renderizarRepositorios(json.items);
+
+        if(window.location.hash) {
+            repo_name = hash;
+            commits_repo = 'https://api.github.com/repos/globocom/'+hash+'/commits?per_page='+per_page_commits+'&page='+numberPage+'';
+
+            $.ajax({
+                url: commits_repo,
+                type: 'get',
+                success: function(json){
+                    let renderer = new RenderizadorHtml();
+                    renderer.renderizarCommits(json, 5, 2, hash, first_request);
+                },
+                error: function(erro){
+                  console.log('deu erro', erro);
+                }
+            })
+        }
     });
 
     //no clique do repositorio mostrar commits
@@ -128,7 +129,7 @@ $(function(){
     	numberPage++;
     	commits_repo = 'https://api.github.com/repos/globocom/'+repo_name+'/commits?per_page='+per_page_commits+'&page='+numberPage+'';
     	event.preventDefault();
-		
+
 		$.getJSON(commits_repo, function(json){
     		let renderer = new RenderizadorHtml();
         	renderer.renderizarCommits(json, null, null, null, first_request);
