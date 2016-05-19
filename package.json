@@ -27,6 +27,7 @@
     "gulp-uglify": "^1.1.0",
     "gulp-useref": "^3.0.0",
     "main-bower-files": "^2.5.0",
+    "parse-link-header": "^0.4.1",
     "wiredep": "^2.2.2"
   },
   "eslintConfig": {

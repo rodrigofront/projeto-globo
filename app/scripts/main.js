@@ -5,13 +5,36 @@ $(function(){
         hash       = document.URL.substr(document.URL.indexOf('#')+1),
         commits,
         commits_repo = '',
+        url_mostra_mais_commits,
         repo_name,
         per_page_commits = 20,
-        first_request = true,
         forks_count,
         stargazers_count,
         numberPage = 1,
         repositories;
+
+
+    function parse_link_header(header) {
+        if (header.length === 0) {
+            throw new Error("input must not be of zero length");
+        }
+
+        // Split parts by comma
+        var parts = header.split(',');
+        var links = {};
+        // Parse each part into a named link
+        for(var i=0; i<parts.length; i++) {
+            var section = parts[i].split(';');
+            if (section.length !== 2) {
+                throw new Error("section could not be split on ';'");
+            }
+            var url = section[0].replace(/<(.*)>/, '$1').trim();
+            var name = section[1].replace(/rel="(.*)"/, '$1').trim();
+            links[name] = url;
+        }
+        return links;
+    }
+
 
     class Repositorio {
         constructor(nome, count_stars, count_forks){
@@ -46,8 +69,8 @@ $(function(){
             }
         }
 
-        renderizarCommits(jsonDeCommits, stars, forks, repo_name, first_request){
-        	if (first_request) {
+        renderizarCommits(jsonDeCommits, stars, forks, repo_name, url_mostra_mais_commits){
+        	if (url_mostra_mais_commits) {
 		        $('.stars').html(stars);
 
 		        $('.forks').html(forks);
@@ -60,11 +83,10 @@ $(function(){
 	        	    let commit = new Commit(jsonDeCommits[i].commit.author.name, jsonDeCommits[i].commit.message, jsonDeCommits[i].commit.author.date)
 	        	    $('#last-commits').append('<li><p>'+ commit.author +'</p><p>'+ commit.descricao +'</p><p>'+ commit.data +'</p></li>');
 	        	}
-
-		        if (jsonDeCommits.length == per_page_commits) {
-		        	$('#box-btn').empty();
-	            	$('#box-btn').append('<a href="#" class="btn-show-more">Ver mais</a>');
-		        }
+		        
+	        	$('#box-btn').empty();
+            	$('#box-btn').append('<a href="#" class="btn-show-more">Ver mais</a>');
+		        
 
 		        else {
 	        		$('.btn-show-more').hide();
@@ -77,38 +99,48 @@ $(function(){
     		        $('#last-commits').append('<li><p>'+ commit.author +'</p><p>'+ commit.descricao +'</p><p>'+ commit.data +'</p></li>');
     		    }
 
-	        	if (jsonDeCommits.length != per_page_commits) {
+	        	if (jsonDeCommits.length != url_mostra_mais_commits) {
     				$('.btn-show-more').hide();
 	        	}
 	        }
         }
     }
 
-    $.getJSON(org_repos, function(json){
-        let renderer = new RenderizadorHtml();
-        renderer.renderizarRepositorios(json.items);
+    $.ajax({
+        url: org_repos,
+        type: 'get',
+        success: function(json){
+            let renderer = new RenderizadorHtml();
+        	renderer.renderizarRepositorios(json.items);
 
-        if(window.location.hash) {
-            repo_name = hash;
-            commits_repo = 'https://api.github.com/repos/globocom/'+hash+'/commits?per_page='+per_page_commits+'&page='+numberPage+'';
+        	if(window.location.hash) {
+        	    repo_name = hash;
+        	    commits_repo = 'https://api.github.com/repos/globocom/'+hash+'/commits?per_page='+per_page_commits+'&page='+numberPage+'';
 
-            $.ajax({
-                url: commits_repo,
-                type: 'get',
-                success: function(json){
-                    let renderer = new RenderizadorHtml();
-                    renderer.renderizarCommits(json, 5, 2, hash, first_request);
-                },
-                error: function(erro){
-                  console.log('deu erro', erro);
-                }
-            })
+        	    $.ajax({
+        	        url: commits_repo,
+        	        type: 'get',
+        	        success: function(json, status, xhr){
+        	            let renderer = new RenderizadorHtml();
+        	            renderer.renderizarCommits(json, 5, 2, hash);
+        	            // console.log(xhr.getResponseHeader('Link'));
+
+        	            
+        	        },
+        	        error: function(erro){
+        	          console.log('deu erro', erro);
+        	        }
+        	    });
+        	};
+        },
+
+        error: function(erro){
+          console.log('deu erro', erro);
         }
     });
 
     //no clique do repositorio mostrar commits
     $('#github-projects').on('click', '.repos', function(event){
-    	first_request = true;
     	numberPage = 1;
         event.preventDefault();
         	repo_name = $(this).data('repo-name');
@@ -118,21 +150,41 @@ $(function(){
 
 		window.location.hash = repo_name;
 
-        $.getJSON(commits_repo, function(json){
-    		let renderer = new RenderizadorHtml();
-        	renderer.renderizarCommits(json, repo_stars, repo_forks, repo_name, first_request);
-        });
+		$.ajax({
+		    url: commits_repo,
+		    type: 'get',
+		    success: function(json, status, xhr){
+		        let renderer = new RenderizadorHtml();
+            	
+            	if (xhr.getResponseHeader('Link') == null) {
+            		renderer.renderizarCommits(json, repo_stars, repo_forks, repo_name, xhr.getResponseHeader('Link'));	
+            	}
+
+            	else {
+        			renderer.renderizarCommits(json, repo_stars, repo_forks, repo_name, parse_link_header(xhr.getResponseHeader('Link')).next);
+            	}
+		    },
+		    error: function(erro){
+		      console.log('deu erro', erro);
+		    }
+		});
     });
 
     $('#box-btn').on('click', '.btn-show-more', function(event){
-    	first_request = false;
     	numberPage++;
-    	commits_repo = 'https://api.github.com/repos/globocom/'+repo_name+'/commits?per_page='+per_page_commits+'&page='+numberPage+'';
+    	commits_repo = url_mostra_mais_commits;
     	event.preventDefault();
 
-		$.getJSON(commits_repo, function(json){
-    		let renderer = new RenderizadorHtml();
-        	renderer.renderizarCommits(json, null, null, null, first_request);
-        });
+		$.ajax({
+		    url: commits_repo,
+		    type: 'get',
+		    success: function(json){
+		        let renderer = new RenderizadorHtml();
+        		renderer.renderizarCommits(json, null, null, null);
+		    },
+		    error: function(erro){
+		      console.log('deu erro', erro);
+		    }
+		});
 	});
 });
