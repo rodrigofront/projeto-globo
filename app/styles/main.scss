@@ -1,6 +1,6 @@
 @import "normalize";
 
-html, 
+html,
 body {
     height: 100%;
 }
@@ -19,7 +19,7 @@ ul {
 }
 
 aside {
-    float: left; 
+    float: left;
     width: 30%;
     height: 100%;
     overflow-y: auto;
@@ -40,13 +40,13 @@ aside {
                     text-decoration: none;
                 }
             }
-            
-        }    
+
+        }
     }
 }
 
 section {
-    float: left; 
+    float: left;
     width: 70%;
     height: 100%;
     overflow-y: auto;
@@ -54,6 +54,8 @@ section {
 
     .container {
         max-width: 800px;
+        margin-left: 20px;
+
         h1,p {
             text-align: center;
         }
@@ -76,8 +78,8 @@ section {
             text-align: center;
             color: #fff;
             text-decoration: none;
-            
+
         }
     }
-    
+
 }
