@@ -4,24 +4,84 @@
 		"selected_items":
 		[
 			[
-				"mar",
-				"margin"
+				"tex",
+				"text-align"
+			],
+			[
+				"com",
+				"commits_repo"
+			],
+			[
+				"url",
+				"urlPagination"
+			],
+			[
+				"get",
+				"getPagination"
+			],
+			[
+				"json",
+				"jsonDeCommits"
+			],
+			[
+				"sear",
+				"searchRepos"
+			],
+			[
+				"showm",
+				"showMyCommits"
 			],
 			[
 				"repo",
 				"repo_name"
 			],
 			[
-				"com",
-				"commits"
+				"js",
+				"jsonDeRepositorios"
+			],
+			[
+				"j",
+				"jsonDeRepositorios"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"par",
+				"parse_link_header"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"repos",
+				"repositorios"
+			],
+			[
+				"commi",
+				"commits_repo"
+			],
+			[
+				"cons",
+				"console"
+			],
+			[
+				"desc",
+				"descricao"
+			],
+			[
+				"cou",
+				"count_stars"
+			],
+			[
+				"mar",
+				"margin"
 			],
 			[
 				"comm",
 				"commits_repo"
-			],
-			[
-				"repos",
-				"repositories"
 			],
 			[
 				"pad",
@@ -56,10 +116,6 @@
 				"grid-parent"
 			],
 			[
-				"sear",
-				"search-filters-header"
-			],
-			[
 				"br",
 				"border-radius"
 			],
@@ -86,10 +142,6 @@
 			[
 				"ta",
 				"tablet-grid-45"
-			],
-			[
-				"tex",
-				"text-align"
 			],
 			[
 				"bn",
@@ -199,6 +251,38 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "app/scripts/main.js",
+			"settings":
+			{
+				"buffer_size": 6569,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/styles/main.scss",
+			"settings":
+			{
+				"buffer_size": 1383,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/styles/normalize.scss",
+			"settings":
+			{
+				"buffer_size": 7322,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/layouts/default.jade",
+			"settings":
+			{
+				"buffer_size": 1148,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -265,10 +349,16 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/Rodrigo/Projetos/projeto-globo"
+		"/Users/Rodrigo/Projetos/projeto-globo",
+		"/Users/Rodrigo/Projetos/projeto-globo/app/layouts",
+		"/Users/Rodrigo/Projetos/projeto-globo/app/scripts",
+		"/Users/Rodrigo/Projetos/projeto-globo/app/styles"
 	],
 	"file_history":
 	[
+		"/Users/Rodrigo/Projetos/projeto-globo/GithubGlobo.sublime-project",
+		"/Users/Rodrigo/Projetos/projeto-globo/app/scripts/repositorios.js",
+		"/Users/Rodrigo/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/Rodrigo/Projetos/projeto-globo/gulpfile.js",
 		"/Users/Rodrigo/Projetos/projeto-globo/app/scripts/github.js",
 		"/Users/Rodrigo/Projetos/demo/index.html",
@@ -391,16 +481,13 @@
 		"/Users/Rodrigo/Projetos/Classificados.Layout/app/_partials/views/page-item/item-contact-info-modal.jade",
 		"/Users/Rodrigo/Projetos/Classificados.Layout/app/_partials/views/page-item/item-contact-info.jade",
 		"/Users/Rodrigo/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/Users/Rodrigo/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/Rodrigo/Projetos/Classificados.Layout/app/_partials/views/page-item/item-contact.jade",
 		"/Users/Rodrigo/Projetos/Classificados.Layout/app/_partials/modules/item-contact-form.jade",
-		"/Users/Rodrigo/Projetos/Classificados.Layout/app/_partials/views/page-item/item-slide.jade",
-		"/Users/Rodrigo/Projetos/Classificados.Layout/app/styles/modules/_search-location-rd.scss",
-		"/Users/Rodrigo/Projetos/Classificados.Layout/app/styles/page-search-mix.scss"
+		"/Users/Rodrigo/Projetos/Classificados.Layout/app/_partials/views/page-item/item-slide.jade"
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -423,6 +510,43 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"renderizarRepositorios",
+			"stargazers_count",
+			"repositories",
+			"numberPage",
+			"console",
+			"getPagination",
+			"showMyCommits",
+			"getPagination",
+			"getMyCommits",
+			"searchRepos",
+			"urlPagination",
+			"showMyCommits",
+			"renderizarRepositorios",
+			"org_repos",
+			"renderizarCommits",
+			"url_mostra_mais_commits",
+			"per_page_commits",
+			"first_request",
+			"renderizarCommits",
+			"numberPage",
+			"renderizarCommits",
+			"https://api.github.com/repos/globocom/'+repo_name+'/commits?per_page='+per_page_commits+'&page='+numberPage+'",
+			"repo_name",
+			"https://api.github.com/repos/globocom/'+repo_name+'/commits?per_page='+per_page_commits+'&page='+numberPage+'",
+			"https://api.github.com/repos/globocom/'+hash+'/commits?per_page='+per_page_commits+'&page='+numberPage+'",
+			"https://api.github.com/repos/globocom/'+repo_name+'/commits?per_page='+per_page_commits+'&page='+numberPage+'",
+			"repo_name",
+			"repo_forks",
+			"jsonDeRepositorios",
+			"name",
+			"[i]",
+			"repositories",
+			"Repositorios",
+			"console",
+			"promocao",
+			"imagem",
+			"promocao",
 			"forks",
 			"stars",
 			";",
@@ -513,44 +637,7 @@
 			"search-result-title",
 			"20px",
 			".field-checkbox +",
-			"sidebar",
-			"search-filters-tag",
-			"40",
-			"font",
-			"100",
-			".landscape-grid-",
-			"landscape",
-			".landscape-grid",
-			".landscape-grid-25",
-			"tablet",
-			"small",
-			"captcha-image",
-			"BAC6CC",
-			".modal-open",
-			"large",
-			"item-contact-info-modal",
-			".modal-item-contact-form ",
-			"tablet",
-			"categoria",
-			"+",
-			"e",
-			"tablet",
-			"resultado-busca-paginacao-inferior",
-			"true",
-			"medium",
-			", { onchange: 'this.form.submit();' }",
-			"(onchange='this.form.submit();')",
-			"$color-primary",
-			"modernizr",
-			"mix",
-			"heading-selector",
-			"mobile",
-			"\"",
-			"toggle",
-			".landscape-grid-50",
-			".grid-alpha",
-			".grid-omega",
-			"// grid-spacing\n@include landscape-view {\n    .tablet-grid-spacing {\n        @include grid-selector(\">\") {\n            padding-top: 20px;\n\n            &:first-of-type,\n            &:first-child {\n                padding-top: 0;\n            }\n        }\n    }\n}"
+			"sidebar"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -570,8 +657,128 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/scripts/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6569,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3104,
+								3104
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 238.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/styles/main.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1383,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1201,
+								1201
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 554.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/styles/normalize.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7322,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								264,
+								264
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Syntax Highlighting for Sass/Syntaxes/SCSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/layouts/default.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1148,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1063,
+								1063
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
 			]
 		}
 	],
